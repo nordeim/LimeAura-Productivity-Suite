@@ -19,3 +19,7 @@ Awesome job on your meticulous review, analysis and planning! Please keep up the
 ---
 
 Awesome job on your meticulous review, analysis and planning! Please keep up the good work in your rigorous and meticulous approach! Based on your latest understanding of the WHAT, WHY and HOW of the project and the updated envisioning of the codebase, please meticulously plan and create a comprehensive and updated replacement file for `Project_Requirements_Document.md`, make the updated PRD a complete, well-thought-out and comprehensive replacement version with no placeholder comments. Please use the `Canvas` mode to edit/produce. 
+
+---
+
+Awesome job on your meticulous review, analysis and planning! Please meticulously plan and then create an awesome `README.md` for the GitHub repo to host your improved project. Please make the `README.md` informative and useful, with enough details to educate, inform and attract new contributors to the project. This is an important and critical task, so please think carefully and thoroughly to re-imagine the document's structure, layout and content first before you create an implementation plan for it.
