@@ -7,3 +7,7 @@ Awesome job on your meticulous review, analysis and planning! Please keep up the
 ---
 
 awesome understanding! please meticulously review the attached PRD, its appendix and UI/UX design guideline, then do a thoughtful relevant research to validate your assumptions. Then meticulously plan and create a comprehensive assessment on the proposed application blueprint. I will share the relevant documents over this and the next prompt, so reserve your final assessment after I told you I have shared all the necessary documents for your complete evaluation, analysis and synthesis.
+
+---
+
+Yes, I have shared all the necessary documents. The third document is itself suggested additions/improvements to the original PRD shared. You may think deeper and think harder to deeply explore thoroughly and systematically to review, research and critique the design in a practical and implementable way. For example, how similar application should be designed and implemented.
