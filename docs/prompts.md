@@ -1,0 +1,1 @@
+awesome understanding! please meticulously review the attached PRD and UI/UX design guideline, then do a thoughtful relevant research to validate your assumptions. Then meticulously plan and create a comprehensive assessment on the proposed application blueprint.
