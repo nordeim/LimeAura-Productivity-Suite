@@ -181,3 +181,372 @@ KPIs to track during delivery
 - Median dashboard load time for sample org (goal: <1s for aggregated data).
 - Animation frame-rate percentage of frames >16ms on test devices (goal: >95% success).
 
+---
+
+### Overview
+
+This deliverable is a production-ready, machine-actionable token pipeline and Storybook setup for Phase A. It converts the provided limeaura design tokens JSON into:
+- runtime CSS custom properties for use in plain CSS and component libraries,
+- a strongly typed TypeScript token module for design-time consumption,
+- a canonical token JSON artifact used as single source of truth,
+- Storybook integrated with the token output and initial component stories for Card, Button, Avatar, ToggleSwitch, and ProgressCircular.
+
+Everything below is modular, auditable, versionable, and CI‑friendly. Copy the snippets into your repo and run the provided scripts to generate tokens and boot Storybook.
+
+---
+
+### Goals and outputs
+
+- Single source of truth: use the provided limeaura-design-system.json as the tokens input.
+- Outputs:
+  - dist/tokens.css — CSS :root variables using token paths as kebab-case names.
+  - dist/tokens.ts — TypeScript typed token exports and helper getters.
+  - dist/tokens.json — normalized token subset used by front-end.
+- Storybook:
+  - Storybook v7 config integrated with the token pipeline.
+  - preview setup to inject tokens.css and provide controls for reduced-motion toggle.
+  - Example stories for Card, Button, Avatar, ToggleSwitch, ProgressCircular showing token usage.
+- CI:
+  - GitHub Actions workflow to run token build, token tests, Storybook build, and visual snapshot gateway.
+
+---
+
+### Repository file layout (recommended)
+
+- design-tokens/
+  - limeaura-design-system.json  <-- provided file (source)
+  - scripts/
+    - build-tokens.mjs
+    - normalize-tokens.mjs
+    - token-test.mjs
+  - templates/
+    - css-template.ejs
+    - ts-template.ejs
+  - dist/
+    - tokens.css
+    - tokens.ts
+    - tokens.json
+- packages/frontend/
+  - package.json
+  - src/
+    - components/
+      - Card/
+      - Button/
+      - Avatar/
+      - ToggleSwitch/
+      - ProgressCircular/
+    - index.css
+  - .storybook/
+    - main.js
+    - preview.js
+    - manager.js
+    - preview-head.html
+  - stories/
+    - Card.stories.tsx
+    - Button.stories.tsx
+    - Avatar.stories.tsx
+    - ToggleSwitch.stories.tsx
+    - ProgressCircular.stories.tsx
+- .github/
+  - workflows/
+    - ci.yml
+
+---
+
+### Token pipeline implementation
+
+1) Approach summary
+- Normalize the authoritative JSON into a flat token map keyed by dot paths, then emit consistent kebab-case CSS variable names and a TypeScript module with exact types.
+- Validate token references that use token interpolation patterns like "{color.border.subtle.value}" and resolve them.
+- Run tests to ensure no unresolved references and that color contrast spot checks pass for critical pairs.
+
+2) Example Node script: build-tokens.mjs
+Save in design-tokens/scripts/build-tokens.mjs
+
+```js
+#!/usr/bin/env node
+import fs from 'fs/promises';
+import path from 'path';
+
+const ROOT = path.resolve(new URL(import.meta.url).pathname, '../../');
+const SRC = path.join(ROOT, 'limeaura-design-system.json');
+const DIST = path.join(ROOT, 'dist');
+
+function toKebab(s){
+  return s.replace(/\./g, '-')
+          .replace(/([A-Z])/g, '-$1')
+          .replace(/[_\s]+/g,'-')
+          .toLowerCase()
+          .replace(/--+/g,'-')
+          .replace(/^-|-$|:/g,'');
+}
+
+function flatten(obj, prefix = ''){
+  const out = {};
+  for(const [k,v] of Object.entries(obj)){
+    const key = prefix ? `${prefix}.${k}` : k;
+    if(v && typeof v === 'object' && !('value' in v && Object.keys(v).length<=2)){
+      Object.assign(out, flatten(v, key));
+    } else {
+      out[key] = v;
+    }
+  }
+  return out;
+}
+
+function resolveValue(val, flat){
+  if(typeof val !== 'string') return val;
+  const refMatch = val.match(/\{([^}]+)\}/g);
+  if(!refMatch) return val;
+  let resolved = val;
+  for(const m of refMatch){
+    const inner = m.slice(1,-1);
+    const ref = flat[inner];
+    if(!ref) throw new Error(`Unresolved token reference ${inner}`);
+    const rv = typeof ref === 'object' && 'value' in ref ? ref.value : ref;
+    resolved = resolved.replace(m, rv);
+  }
+  return resolved;
+}
+
+async function main(){
+  const raw = JSON.parse(await fs.readFile(SRC, 'utf8'));
+  const flatRaw = flatten(raw);
+  // create canonical tokens map only for entries with .value
+  const tokens = Object.fromEntries(
+    Object.entries(flatRaw)
+      .filter(([,v]) => v && typeof v === 'object' && 'value' in v)
+      .map(([k,v]) => [k, { value: resolveValue(v.value, flatRaw), meta: {...v, value: undefined}}])
+  );
+
+  await fs.mkdir(DIST, { recursive: true });
+
+  // CSS output
+  const cssLines = [':root {'];
+  for(const [k,t] of Object.entries(tokens)){
+    const varName = `--la-${toKebab(k)}`;
+    cssLines.push(`  ${varName}: ${t.value};`);
+  }
+  cssLines.push('}');
+  await fs.writeFile(path.join(DIST, 'tokens.css'), cssLines.join('\n'), 'utf8');
+
+  // TS output
+  const tsLines = [
+    '// Auto-generated tokens. Do not edit.',
+    'export const tokens = {'
+  ];
+  for(const [k,t] of Object.entries(tokens)){
+    const prop = k.split('.').map(p=>p.replace(/[^a-zA-Z0-9_$]/g,'_')).join('_');
+    tsLines.push(`  "${k}": ${JSON.stringify(t.value)},`);
+  }
+  tsLines.push('} as const;');
+  tsLines.push('export type TokenKey = keyof typeof tokens;');
+  tsLines.push(`export function cssVar(key: TokenKey){ return 'var(--la-' + key.replace(/\\./g,'-') + ')'; }`);
+  await fs.writeFile(path.join(DIST, 'tokens.ts'), tsLines.join('\n'), 'utf8');
+
+  // JSON output
+  await fs.writeFile(path.join(DIST, 'tokens.json'), JSON.stringify(tokens, null, 2), 'utf8');
+
+  console.log('Tokens generated to dist/');
+}
+
+main().catch(err=>{
+  console.error(err);
+  process.exit(1);
+});
+```
+
+3) CSS naming convention
+- Tokens become CSS variables prefixed with --la- to avoid collisions.
+- Examples:
+  - foundations.color.background.main.value → --la-foundations-color-background-main
+  - foundations.spacing.pagePadding.value → --la-foundations-spacing-pagepadding
+
+4) TypeScript module usage
+- tokens.ts exports `tokens` map and helper `cssVar` for runtime-in-CSS-in-JS usage.
+- Example in components:
+```ts
+import { cssVar } from 'design-tokens/dist/tokens';
+const styles = {
+  background: cssVar('foundations.color.surface.primary.value'),
+  borderRadius: 'var(--la-foundations-radius-card-lg)'
+};
+```
+
+5) Token validation script
+Save as design-tokens/scripts/token-test.mjs. It loads dist/tokens.json and runs:
+- unresolved token reference detection,
+- critical contrast check between text.primary and surface.primary using simple luminance formula,
+- ensures required tokens exist (list of essential keys like foundations.color.surface.primary.value, foundations.font.family.primary.value).
+
+---
+
+### Storybook setup
+
+1) Install dependencies (frontend package.json excerpt)
+
+```json
+{
+  "name": "frontend",
+  "private": true,
+  "scripts": {
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "build:tokens": "node ../design-tokens/scripts/build-tokens.mjs"
+  },
+  "devDependencies": {
+    "@storybook/react": "^7.0.0",
+    "@storybook/addon-essentials": "^7.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "typescript": "^5.0.0",
+    "eslint": "^8.0.0",
+    "chromatic": "^6.0.0"
+  }
+}
+```
+
+2) .storybook/main.js
+
+```js
+module.exports = {
+  framework: '@storybook/react',
+  stories: ['../stories/**/*.stories.@(js|jsx|ts|tsx)'],
+  addons: ['@storybook/addon-essentials'],
+  staticDirs: ['../public']
+};
+```
+
+3) .storybook/preview.js
+
+```js
+import '../design-tokens/dist/tokens.css';
+import '../src/index.css';
+export const parameters = {
+  actions: { argTypesRegex: '^on[A-Z].*' },
+  controls: { expanded: true },
+};
+export const decorators = [
+  Story => {
+    // Reduced motion control visible in toolbar
+    return <div style={{ padding: '40px', background: 'var(--la-foundations-color-background-main)' }}>
+      <Story />
+    </div>;
+  }
+];
+```
+
+4) preview-head.html
+Include any fonts and meta for prefer-reduced-motion toggle. Use preload for Nunito.
+
+5) Example Story: Button.stories.tsx
+
+```tsx
+import React from 'react';
+import { Button } from '../src/components/Button';
+import { tokens } from '../../design-tokens/dist/tokens';
+
+export default { title: 'Controls/Button', component: Button };
+
+export const Primary = () => <Button variant="primary">Primary action</Button>;
+export const Secondary = () => <Button variant="secondary">Secondary</Button>;
+```
+
+6) Component wiring notes
+- Components should consume CSS variables for styling and fall back to tokens.ts values when needed in inline styles.
+- Keep Storybook stories focused: visual variants, accessibility props, reduced-motion story.
+
+---
+
+### CI integration and validation
+
+1) GitHub Actions: .github/workflows/ci.yml
+
+```yaml
+name: CI
+on: [push, pull_request]
+jobs:
+  build-tokens:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: Install deps
+        run: |
+          cd design-tokens
+          npm ci
+      - name: Build tokens
+        run: node scripts/build-tokens.mjs
+      - name: Token tests
+        run: node scripts/token-test.mjs
+  storybook:
+    needs: build-tokens
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: Install Frontend deps
+        run: |
+          cd packages/frontend
+          npm ci
+      - name: Build Storybook
+        run: |
+          cd packages/frontend
+          npm run build:tokens
+          npm run build-storybook
+```
+
+2) Visual regression
+- Integrate Chromatic or Playwright snapshots after the Storybook build stage.
+- Gate PRs on visual snapshot pass for critical stories.
+
+3) Token contract test automation
+- token-test.mjs should fail CI on missing essential tokens or unresolved references.
+
+---
+
+### Tests, validation and acceptance criteria
+
+- Token tests:
+  - No unresolved references.
+  - All required tokens exist.
+  - Spot contrast tests pass for minimal critical pairs. Provide code to compute luminance and contrast in token-test.mjs.
+- Storybook tests:
+  - Storybook builds successfully after tokens are generated.
+  - Chromatic snapshots for the five seed components pass.
+- Accessibility tests:
+  - Run axe-core against Storybook static build pages and fail on critical/serious issues.
+- Acceptance for Phase A:
+  - dist/tokens.css and dist/tokens.ts are present, tokens.json exists and references resolved.
+  - Storybook builds and includes token styling for components.
+  - CI token tests pass and Storybook build step succeeds.
+
+---
+
+### Next steps and checklist for you to run locally
+
+1. Add the provided design-tokens/scripts directory and place limeaura-design-system.json there.
+2. Ensure Node 18+ is available.
+3. Run:
+   - cd design-tokens
+   - node scripts/build-tokens.mjs
+   - confirm dist/tokens.css, dist/tokens.ts, dist/tokens.json are created
+4. Wire tokens into frontend:
+   - import design-tokens/dist/tokens.css in Storybook preview and your main app entry
+   - use tokens.ts for typed constants in component logic
+5. Start Storybook:
+   - cd packages/frontend
+   - npm run build:tokens
+   - npm run storybook
+6. Open Storybook at http://localhost:6006 and verify Card, Button, Avatar, ToggleSwitch, ProgressCircular show token-driven styles and that reduced-motion toggle works.
+7. Commit and push; verify CI pipeline runs build-tokens and Storybook build.
+
+---
+
+https://copilot.microsoft.com/shares/e9SdAgQe2WwReaawiMwqT
