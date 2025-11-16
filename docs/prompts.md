@@ -1,3 +1,7 @@
+Now, please help me meticulously review the attached project documents, then think deeper and explore thoroughly ho best to build a working codebase for the app based on your best understanding of the WHAT, WHY and HOW of the project. Remember to always meticulous create a comprehensive implementation with integrated checklist before your proceed to execute your plan.
+
+---
+
 awesome understanding! please meticulously review the attached PRD and UI/UX design guideline, then do a thoughtful relevant research to validate your assumptions. Then meticulously plan and create a comprehensive assessment on the proposed application blueprint.
 
 ---
