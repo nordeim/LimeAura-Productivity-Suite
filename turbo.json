@@ -1,0 +1,48 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": [
+    "**/.env.*"
+  ],
+  "pipeline": {
+    "build": {
+      "description": "Build all apps and packages",
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "dist/**",
+        ".next/**",
+        "storybook-static/**"
+      ],
+      "cache": true
+    },
+    "lint": {
+      "description": "Lint all apps and packages",
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [],
+      "cache": true
+    },
+    "test": {
+      "description": "Test all apps and packages",
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "coverage/**"
+      ],
+      "cache": true
+    },
+    "dev": {
+      "description": "Run all apps and packages in dev mode",
+      "cache": false,
+      "persistent": true
+    },
+    "clean": {
+      "description": "Clean all build artifacts",
+      "cache": false,
+      "outputs": []
+    }
+  }
+}
