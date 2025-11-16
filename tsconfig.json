@@ -1,0 +1,59 @@
+{
+  "compilerOptions": {
+    // --- Project Options ---
+    "target": "ES2022",
+    "module": "ESNext",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "jsx": "react-jsx",
+    "allowJs": true,
+    "sourceMap": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+
+    // --- Strict Type-Checking ---
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+
+    // --- Module Resolution ---
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
+    // --- Linter Checks ---
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+
+    // --- Aliases (to be extended by each package/app) ---
+    "baseUrl": ".",
+    "paths": {
+      "@limeaura/types": [
+        "packages/types/src"
+      ],
+      "@limeaura/ui": [
+        "packages/ui/src"
+      ],
+      "@limeaura/api-client": [
+        "packages/api-client/src"
+      ]
+      // Add other packages as they are created
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build"
+  ]
+}
