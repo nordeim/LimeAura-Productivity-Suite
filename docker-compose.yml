@@ -1,0 +1,57 @@
+# =====================================================
+# Docker Compose for Local Development Services
+#
+# This file provides the backing services (Postgres, Redis)
+# required for local development, as defined in the
+# Project Architecture Document and Database Schema.
+#
+# Usage:
+#   docker-compose up -d    (Start services)
+#   docker-compose down     (Stop services)
+#   docker-compose down -v  (Stop and remove volumes)
+# =====================================================
+
+version: '3.8'
+
+services:
+  # --- PostgreSQL Database (v16) ---
+  # As specified in database_schema.md
+  postgres:
+    image: postgres:16
+    container_name: limeaura_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: limeaura
+    ports:
+      - "5432:5432"
+    volumes:
+      - limeaura_db_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d limeaura" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # --- Redis Cache (v7.2) ---
+  # As specified in Project_Architecture_Document.md
+  redis:
+    image: redis:7.2-alpine
+    container_name: limeaura_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - limeaura_redis_data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  limeaura_db_data:
+    driver: local
+  limeaura_redis_data:
+    driver: local
