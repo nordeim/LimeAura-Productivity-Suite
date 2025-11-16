@@ -1,0 +1,53 @@
+# =====================================================
+# Continuous Integration (CI) Workflow
+#
+# Runs on every push to 'main' and all pull requests.
+# As specified in Master_Execution_Plan.md (Phase 0).
+# =====================================================
+
+name: LimeAura CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    name: Build & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 1. Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 2. Setup PNPM
+        # Use pnpm 8.x as specified in package.json
+        uses: pnpm/action-setup@v4
+        with:
+          version: 8
+
+      - name: 3. Setup Node.js
+        # Use Node.js 20.x as specified in Project_Architecture_Document.md
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: 4. Install Dependencies
+        run: pnpm install
+
+      - name: 5. Run Lint
+        # Uses the "lint" script defined in turbo.json
+        run: pnpm lint
+
+      - name: 6. Run Tests
+        # Uses the "test" script defined in turbo.json
+        run: pnpm test
+
+      - name: 7. Run Build
+        # Uses the "build" script defined in turbo.json
+        run: pnpm build
