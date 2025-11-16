@@ -1,0 +1,57 @@
+=====================================================
+
+Gitignore for LimeAura Monorepo
+
+=====================================================
+
+--- Dependencies ---
+
+/node_modules
+/.pnpm-store
+
+--- Build Artifacts ---
+
+/dist
+/build
+/out
+/.next
+/storybook-static
+/coverage
+
+--- Logs ---
+
+logs
+.log
+npm-debug.log
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.npm
+
+--- Environment ---
+
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.envrc
+
+--- OS / IDE ---
+
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*~
+
+--- Turbo ---
+
+.turbo
+
+--- Tests ---
+
+/junit.xml
+/playwright-report/
