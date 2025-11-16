@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    // --- Project Options ---
     "target": "ES2022",
     "module": "ESNext",
     "lib": [
@@ -14,7 +13,6 @@
     "isolatedModules": true,
     "skipLibCheck": true,
 
-    // --- Strict Type-Checking ---
     "strict": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
@@ -24,19 +22,16 @@
     "noImplicitThis": true,
     "alwaysStrict": true,
 
-    // --- Module Resolution ---
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
 
-    // --- Linter Checks ---
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
 
-    // --- Aliases (to be extended by each package/app) ---
     "baseUrl": ".",
     "paths": {
       "@limeaura/types": [
@@ -48,7 +43,6 @@
       "@limeaura/api-client": [
         "packages/api-client/src"
       ]
-      // Add other packages as they are created
     }
   },
   "exclude": [
