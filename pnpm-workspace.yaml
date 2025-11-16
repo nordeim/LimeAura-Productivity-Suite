@@ -1,0 +1,5 @@
+# This file defines the monorepo structure for pnpm.
+# It tells pnpm where to find the projects (apps) and shared packages.
+packages:
+  - 'apps/*'
+  - 'packages/*'
