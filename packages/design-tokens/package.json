@@ -1,0 +1,19 @@
+{
+  "name": "@limeaura/design-tokens",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Design system tokens and build pipeline for LimeAura",
+  "main": "dist/tokens.ts",
+  "types": "dist/tokens.ts",
+  "scripts": {
+    "build": "ts-node scripts/build.ts",
+    "test": "vitest run",
+    "dev": "vitest watch"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.12",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4",
+    "vitest": "^2.0.4"
+  }
+}
