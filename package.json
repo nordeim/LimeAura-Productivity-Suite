@@ -1,0 +1,23 @@
+{
+  "name": "limeaura",
+  "private": true,
+  "description": "LimeAura Productivity Suite Monorepo",
+  "author": "LimeAura Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "test": "turbo test",
+    "lint": "turbo lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md,json}\""
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3",
+    "turbo": "^2.0.9"
+  },
+  "packageManager": "pnpm@8.15.9"
+}
