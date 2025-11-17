@@ -1,0 +1,132 @@
+/**
+ * @file packages/ui/src/components/Button/Button.module.css
+ * @purpose Styles for the Button component.
+ * @phase 4
+ */
+
+/* Base button styles */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-medium);
+  border-radius: var(--radius-pill);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all var(--motion-duration-normal) var(--motion-easing-standard);
+  will-change: transform, box-shadow, background-color;
+  overflow: hidden;
+  white-space: nowrap;
+  user-select: none;
+}
+
+/* --- Sizes (md is default) --- */
+.sm {
+  height: 32px;
+  padding: 0 var(--spacing-md);
+  font-size: var(--font-size-label);
+}
+.md {
+  height: 36px;
+  padding: 0 var(--spacing-lg);
+  font-size: var(--font-size-body);
+}
+.lg {
+  height: 44px;
+  padding: 0 var(--spacing-xl);
+  font-size: var(--font-size-bodyLg);
+}
+
+/* --- Variants --- */
+.primary {
+  background-color: var(--color-accent-primary);
+  color: var(--color-text-onAccent);
+  box-shadow: var(--shadow-button-primary);
+}
+.primary:hover:not(:disabled) {
+  background-color: #6B2FFF; /* From design system hover state */
+  box-shadow: 0 10px 25px 0 rgba(123, 62, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+.secondary {
+  background-color: var(--color-surface-primary);
+  color: var(--color-text-primary);
+  border-color: var(--color-border-subtle);
+}
+.secondary:hover:not(:disabled) {
+  background-color: var(--color-surface-soft);
+  border-color: #d1d5db;
+  transform: translateY(-2px);
+}
+
+.success {
+  background-color: var(--color-semantic-success);
+  color: var(--color-text-onAccent);
+  box-shadow: 0 6px 15px rgba(16, 185, 129, 0.25);
+}
+.success:hover:not(:disabled) {
+  background-color: #0da26c;
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.35);
+  transform: translateY(-2px);
+}
+
+.ghost {
+  background-color: transparent;
+  color: var(--color-text-primary);
+}
+.ghost:hover:not(:disabled) {
+  background-color: var(--color-surface-soft);
+}
+
+.danger {
+  background-color: var(--color-semantic-danger);
+  color: var(--color-text-onAccent);
+}
+.danger:hover:not(:disabled) {
+  background-color: #d93737;
+  transform: translateY(-2px);
+}
+
+/* --- States --- */
+.button:active:not(:disabled) {
+  transform: translateY(0) scale(0.98);
+}
+
+.button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+/* --- Content (Icon + Loading) --- */
+.icon {
+  display: inline-flex;
+  align-items: center;
+  margin-right: var(--spacing-sm);
+}
+.sm .icon { font-size: 14px; }
+.md .icon { font-size: 16px; }
+.lg .icon { font-size: 18px; }
+
+.content {
+  transition: opacity var(--motion-duration-fast);
+}
+
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-flex;
+}
+
+.loading .content,
+.loading .icon {
+  opacity: 0;
+}
