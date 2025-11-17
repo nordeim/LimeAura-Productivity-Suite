@@ -1,0 +1,58 @@
+/**
+ * @file packages/ui/src/components/Avatar/Avatar.module.css
+ * @purpose Styles for the Avatar component.
+ * @phase 4
+ */
+.avatar {
+  display: inline-block;
+  border-radius: var(--radius-pill);
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 2px solid var(--color-surface-primary);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: all var(--motion-duration-normal) var(--motion-easing-standard);
+}
+.avatar:hover {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-avatar-hover);
+  z-index: 10;
+}
+
+/* Fallback styles */
+.fallback {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-onAccent);
+}
+
+/* Sizes */
+.sm {
+  width: var(--size-avatar-sm);
+  height: var(--size-avatar-sm);
+  font-size: 12px;
+}
+.md {
+  width: var(--size-avatar-md);
+  height: var(--size-avatar-md);
+  font-size: 14px;
+}
+.lg {
+  width: var(--size-avatar-lg);
+  height: var(--size-avatar-lg);
+  font-size: 20px;
+}
+.xl {
+  width: 96px;
+  height: 96px;
+  font-size: 32px;
+}
+
+/* Fallback colors */
+.color0 { background: linear-gradient(135deg, #7B3EFF, #5A20E0); } /* Primary Accent */
+.color1 { background: linear-gradient(135deg, #00C6AE, #009E8A); } /* Secondary Accent */
+.color2 { background: linear-gradient(135deg, #FFB020, #D98C00); } /* Yellow Accent */
+.color3 { background: linear-gradient(135deg, #EF4444, #C72A2A); } /* Danger */
+.color4 { background: linear-gradient(135deg, #10B981, #0A8A61); } /* Success */
