@@ -35,17 +35,35 @@
     // --- Aliases (to be extended by each package/app) ---
     "baseUrl": ".",
     "paths": {
+      // --- Phase 1 ---
       "@limeaura/design-tokens": [
         "packages/design-tokens/src"
       ],
       "@limeaura/ui": [
         "packages/ui/src"
       ],
+      // --- Phase 2 ---
+      "@limeaura/types": [
+        "packages/types/src"
+      ],
+      // --- Phase 3 ---
       "@limeaura/api-client": [
         "packages/api-client/src"
       ],
-      "@limeaura/types": [
-        "packages/types/src"
+      "@limeaura/websocket": [
+        "packages/websocket/src"
+      ],
+      "@limeaura/offline-store": [
+        "packages/offline-store/src"
+      ],
+      "@limeaura/auth": [
+        "packages/auth/src"
+      ],
+      "@limeaura/state": [
+        "packages/state/src"
+      ],
+      "@limeaura/analytics": [
+        "packages/analytics/src"
       ]
       // Add other packages as they are created
     }
