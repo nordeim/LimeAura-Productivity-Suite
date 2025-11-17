@@ -1,0 +1,25 @@
+{
+  "name": "@limeaura/offline-store",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Offline-first IndexedDB storage and sync engine",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "lint": "eslint . --ext .ts,.tsx",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "dexie": "^4.0.8"
+  },
+  "devDependencies": {
+    "@limeaura/api-client": "workspace:*",
+    "@limeaura/types": "workspace:*",
+    "eslint": "^8.57.0",
+    "typescript": "^5.5.4"
+  },
+  "peerDependencies": {
+    "@limeaura/api-client": "workspace:*",
+    "@limeaura/types": "workspace:*"
+  }
+}
