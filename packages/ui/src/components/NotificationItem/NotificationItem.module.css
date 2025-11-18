@@ -1,0 +1,57 @@
+/**
+ * @file packages/ui/src/components/NotificationItem/NotificationItem.module.css
+ * @purpose Styles for the NotificationItem component.
+ * @phase 5
+ */
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-card-md);
+  transition: all var(--motion-duration-normal) var(--motion-easing-standard);
+  cursor: pointer;
+  position: relative;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+}
+.item:hover {
+  background-color: var(--color-surface-soft);
+  transform: translateX(4px);
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+}
+
+.text {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-body);
+  color: var(--color-text-primary);
+  line-height: var(--font-lineHeight-snug);
+  margin-bottom: var(--spacing-xs);
+}
+
+.timestamp {
+  font-size: var(--font-size-label);
+  color: var(--color-text-muted);
+}
+
+.unreadDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-accent-primary);
+  flex-shrink: 0;
+  margin-top: var(--spacing-xs);
+}
+
+.read {
+  opacity: 0.7;
+}
+.read:hover {
+  opacity: 1;
+}
