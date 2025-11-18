@@ -1,0 +1,52 @@
+/**
+ * @file packages/ui/src/components/SearchInput/SearchInput.module.css
+ * @purpose Styles for the SearchInput component.
+ * @phase 5
+ */
+.wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.input {
+  padding-left: 40px !important; /* Override Input component padding */
+  padding-right: 40px !important;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+.spinner {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.clearButton {
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--motion-duration-fast);
+}
+.clearButton:hover {
+  background-color: var(--color-surface-soft);
+  color: var(--color-text-primary);
+}
