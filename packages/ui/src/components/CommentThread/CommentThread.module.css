@@ -1,0 +1,80 @@
+/**
+ * @file packages/ui/src/components/CommentThread/CommentThread.module.css
+ * @purpose Styles for the CommentThread component.
+ * @phase 6
+ */
+.wrapper {
+  font-family: var(--font-family-primary);
+}
+
+.commentList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+}
+
+.commentItem {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.commentBody {
+  flex-grow: 1;
+  background: var(--color-surface-soft);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-card-md);
+  padding: var(--spacing-md);
+}
+
+.commentHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-xs);
+}
+
+.author {
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-body);
+  color: var(--color-text-primary);
+}
+
+.timestamp {
+  font-size: var(--font-size-label);
+  color: var(--color-text-muted);
+}
+
+.content {
+  font-size: var(--font-size-body);
+  color: var(--color-text-primary);
+  line-height: var(--font-lineHeight-normal);
+}
+
+.newComment {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.commentInput {
+  flex-grow: 1;
+  min-height: 80px;
+  border-radius: var(--radius-card-md);
+  border: 1px solid var(--color-border-subtle);
+  padding: var(--spacing-md);
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-body);
+  resize: vertical;
+}
+.commentInput:focus {
+  outline: none;
+  border-color: var(--color-accent-primary);
+  box-shadow: 0 0 0 3px var(--color-accent-primarySoft);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--spacing-md);
+  padding-left: calc(var(--size-avatar-md) + var(--spacing-md));
+}
