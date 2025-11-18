@@ -1,0 +1,105 @@
+/**
+ * @file packages/ui/src/components/CommandPalette/CommandPalette.module.css
+ * @purpose Styles for the CommandPalette component.
+ * @phase 6
+ */
+
+/* Backdrop */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  padding-top: 15vh;
+  animation: fadeIn 150ms var(--motion-easing-standard);
+}
+
+/* Dialog */
+.dialog {
+  background-color: var(--color-surface-primary);
+  border-radius: var(--radius-card-md);
+  width: 600px;
+  max-width: 90vw;
+  box-shadow: var(--shadow-floating);
+  overflow: hidden;
+  animation: scaleIn 200ms var(--motion-easing-gentle);
+}
+
+.searchWrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-bottom: 1px solid var(--color-border-subtle);
+  color: var(--color-text-muted);
+}
+
+.input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: none;
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-bodyLg);
+  color: var(--color-text-primary);
+}
+.input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.list {
+  max-height: 400px;
+  overflow-y: auto;
+  padding: var(--spacing-sm);
+}
+
+.empty {
+  padding: var(--spacing-xl);
+  text-align: center;
+  font-family: var(--font-family-primary);
+  color: var(--color-text-muted);
+}
+
+.group {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+  padding: var(--spacing-sm) var(--spacing-md);
+  text-transform: uppercase;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  border-radius: 8px;
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-body);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: background-color var(--motion-duration-fast);
+}
+.item[aria-selected="true"] {
+  background-color: var(--color-accent-primarySoft);
+  color: var(--color-accent-primary);
+}
+.item svg {
+  color: var(--color-text-muted);
+}
+.item[aria-selected="true"] svg {
+  color: var(--color-accent-primary);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
