@@ -1,0 +1,47 @@
+/**
+ * @file packages/ui/src/components/Tooltip/Tooltip.module.css
+ * @purpose Styles for the Tooltip component.
+ * @phase 4
+ */
+.tooltip {
+  background-color: var(--color-text-primary);
+  color: var(--color-common-white);
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-medium);
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-floating);
+  z-index: 1000;
+}
+
+.arrow,
+.arrow::before {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: inherit;
+}
+
+.arrow {
+  visibility: hidden;
+}
+
+.arrow::before {
+  visibility: visible;
+  content: '';
+  transform: rotate(45deg);
+}
+
+.tooltip[data-popper-placement^='top'] > .arrow {
+  bottom: -4px;
+}
+.tooltip[data-popper-placement^='bottom'] > .arrow {
+  top: -4px;
+}
+.tooltip[data-popper-placement^='left'] > .arrow {
+  right: -4px;
+}
+.tooltip[data-popper-placement^='right'] > .arrow {
+  left: -4px;
+}
