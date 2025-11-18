@@ -1,7 +1,7 @@
 /**
  * @file packages/ui/src/index.ts
  * @purpose Main entry point for the @limeaura/ui package. Exports all components.
- * @phase 4 & 5
+ * @phase 4, 5 & 6
  */
 
 // --- Phase 4: Atoms ---
@@ -25,3 +25,15 @@ export * from './components/SearchInput/SearchInput';
 export * from './components/DatePicker/DatePicker';
 export * from './components/TagInput/TagInput';
 export * from './components/FileUpload/FileUpload';
+
+// --- Phase 6: Organisms ---
+export * from './components/KanbanBoard/KanbanBoard';
+export * from './components/Calendar/Calendar';
+export * from './components/GanttChart/GanttChart';
+export * from './components/Dashboard/Dashboard';
+export * from './components/TaskForm/TaskForm';
+export * from './components/CommentThread/CommentThread';
+export * from './components/ProjectSidebar/ProjectSidebar';
+export * from './components/NotificationCenter/NotificationCenter';
+export * from './components/UserMenu/UserMenu';
+export * from './components/CommandPalette/CommandPalette';
