@@ -1,0 +1,105 @@
+/**
+ * @file apps/web/src/pages/HomePage.module.css
+ * @purpose Styles for the HomePage.
+ * @phase 9
+ */
+.wrapper {
+  min-height: 100vh;
+  background-color: var(--color-surface-primary);
+  display: flex;
+  flex-direction: column;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-lg) var(--spacing-pagePadding);
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.logo {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.navLinks {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing-xxxl) var(--spacing-pagePadding);
+}
+
+.hero {
+  text-align: center;
+  max-width: 800px;
+  margin-bottom: 80px;
+}
+
+.title {
+  font-size: 64px;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  line-height: 1.1;
+  margin-bottom: var(--spacing-lg);
+  letter-spacing: -0.02em;
+}
+
+.highlight {
+  color: var(--color-accent-primary);
+}
+
+.subtitle {
+  font-size: var(--font-size-h3);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-xl);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta {
+  display: flex;
+  justify-content: center;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-xl);
+  width: 100%;
+  max-width: 1200px;
+}
+
+.featureCard {
+  text-align: center;
+  height: 100%;
+}
+
+.featureIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: var(--color-accent-primarySoft);
+  color: var(--color-accent-primary);
+  margin-bottom: var(--spacing-lg);
+}
+
+.footer {
+  text-align: center;
+  padding: var(--spacing-xl);
+  color: var(--color-text-muted);
+  border-top: 1px solid var(--color-border-subtle);
+}
