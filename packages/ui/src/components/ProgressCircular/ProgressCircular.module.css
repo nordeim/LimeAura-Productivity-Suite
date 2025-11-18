@@ -1,0 +1,36 @@
+/**
+ * @file packages/ui/src/components/ProgressCircular/ProgressCircular.module.css
+ * @purpose Styles for the ProgressCircular component.
+ * @phase 5
+ */
+.wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.svg {
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+
+.track {
+  fill: none;
+  stroke: var(--color-accent-primarySoft);
+}
+
+.fill {
+  fill: none;
+  stroke: var(--color-accent-primary);
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.6s var(--motion-easing-standard);
+}
+
+.label {
+  position: absolute;
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-accent-primary);
+}
