@@ -1,0 +1,98 @@
+/**
+ * @file apps/web/src/layouts/AppLayout.module.css
+ * @purpose Styles for the AppLayout.
+ * @phase 8
+ */
+.layout {
+  display: flex;
+  height: 100vh;
+  background-color: var(--color-background-main);
+  overflow: hidden;
+}
+
+.publicMain {
+  width: 100%;
+  height: 100%;
+}
+
+.sidebar {
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+/* Override sidebar height to match container */
+.projectSidebar {
+  height: 100%; 
+}
+
+.mainWrapper {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0; /* Prevent flex overflow */
+  background-color: var(--color-surface-soft);
+}
+
+.header {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--spacing-xl);
+  background-color: var(--color-surface-primary);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.headerLeft {
+  flex: 1;
+}
+
+.searchTrigger {
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-normal);
+  width: 300px;
+  justify-content: flex-start;
+  background-color: var(--color-surface-soft);
+  border: 1px solid var(--color-border-subtle);
+}
+.searchTrigger:hover {
+  background-color: var(--color-background-main);
+}
+
+.searchLabel {
+  margin-left: var(--spacing-sm);
+  flex-grow: 1;
+  text-align: left;
+}
+
+.shortcut {
+  font-size: 12px;
+  padding: 2px 6px;
+  background-color: var(--color-border-subtle);
+  border-radius: 4px;
+  color: var(--color-text-secondary);
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.notifWrapper {
+  position: relative;
+}
+
+.notifDropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: var(--spacing-sm);
+  z-index: 100;
+}
+
+.content {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: var(--spacing-xl);
+}
