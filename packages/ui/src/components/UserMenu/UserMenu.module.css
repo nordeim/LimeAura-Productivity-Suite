@@ -1,0 +1,43 @@
+/**
+ * @file packages/ui/src/components/UserMenu/UserMenu.module.css
+ * @purpose Styles for the UserMenu component.
+ * @phase 6
+ */
+.trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  background: none;
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: var(--spacing-xs);
+  cursor: pointer;
+  transition: background-color var(--motion-duration-fast);
+  text-align: left;
+}
+.trigger:hover {
+  background-color: var(--color-surface-soft);
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.userName {
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-body);
+  color: var(--color-text-primary);
+}
+
+.userEmail {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-label);
+  color: var(--color-text-muted);
+}
+
+.chevron {
+  color: var(--color-text-muted);
+  margin-left: var(--spacing-sm);
+}
