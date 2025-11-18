@@ -1,0 +1,39 @@
+/**
+ * @file packages/ui/src/components/Card/Card.module.css
+ * @purpose Styles for the Card component.
+ * @phase 5
+ */
+.card {
+  background-color: var(--color-surface-primary);
+  border-radius: var(--radius-card-lg);
+  box-shadow: var(--shadow-card);
+  padding: var(--spacing-xxl);
+  transition: all var(--motion-duration-normal) var(--motion-easing-standard);
+  position: relative;
+  will-change: transform, box-shadow;
+  opacity: 0; /* Set by default for animation */
+  transform: translateY(20px); /* Set by default for animation */
+  animation-fill-mode: forwards; /* Handled by AnimationOrchestrator */
+}
+
+.compact {
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-card-md);
+}
+
+.hero {
+  padding: var(--spacing-xxxl);
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.hoverable:hover {
+  box-shadow: var(--shadow-floating);
+  transform: translateY(-4px) rotateX(1deg) rotateY(0.5deg);
+}
+
+.clickable:active {
+  transform: translateY(-2px) scale(0.995);
+}
