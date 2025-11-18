@@ -1,0 +1,10 @@
+/**
+ * @file packages/ui/src/components/Icon/Icon.module.css
+ * @purpose Styles for the Icon component.
+ * @phase 4
+ */
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
+}
