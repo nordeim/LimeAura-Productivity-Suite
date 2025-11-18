@@ -1,0 +1,77 @@
+/**
+ * @file packages/ui/src/components/Toggle/Toggle.module.css
+ * @purpose Styles for the Toggle component.
+ * @phase 4
+ */
+
+.wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  cursor: pointer;
+  user-select: none;
+}
+.wrapper.labelLeft {
+  flex-direction: row-reverse;
+}
+.wrapper.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.label {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-body);
+  color: var(--color-text-primary);
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: var(--size-control-toggle-width);
+  height: var(--size-control-toggle-height);
+  flex-shrink: 0;
+}
+
+.input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #E5E7EB; /* From design system */
+  transition: all var(--motion-duration-normal) var(--motion-easing-standard);
+  border-radius: var(--radius-pill);
+  display: flex;
+  align-items: center;
+  padding: 3px;
+}
+
+.handle {
+  height: var(--size-control-toggle-handle);
+  width: var(--size-control-toggle-handle);
+  background-color: var(--color-common-white);
+  transition: all var(--motion-duration-normal) var(--motion-easing-standard);
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transform: translateX(0px);
+}
+
+.input:checked + .slider {
+  background-color: var(--color-accent-primary);
+}
+
+.input:checked + .slider .handle {
+  transform: translateX(calc(var(--size-control-toggle-width) - var(--size-control-toggle-handle) - 6px));
+}
+
+.input:focus-visible + .slider {
+  box-shadow: 0 0 0 3px var(--color-accent-primarySoft);
+}
