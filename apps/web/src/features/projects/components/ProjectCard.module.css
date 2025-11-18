@@ -1,0 +1,54 @@
+/**
+ * @file apps/web/src/features/projects/components/ProjectCard.module.css
+ * @purpose Styles for the ProjectCard.
+ * @phase 7
+ */
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.identifier {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+}
+
+.title {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.description {
+  font-size: var(--font-size-body);
+  color: var(--color-text-secondary);
+  line-height: var(--font-lineHeight-snug);
+  flex-grow: 1;
+  margin-bottom: var(--spacing-lg);
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.avatars {
+  display: flex;
+  padding-left: 10px;
+}
+
+.avatar {
+  margin-left: -10px;
+}
