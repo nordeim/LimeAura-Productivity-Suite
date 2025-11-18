@@ -6,35 +6,37 @@ LimeAura is a productivity suite designed with a **Local-First** philosophy, uti
 
 ## **Component Diagram**
 
-graph TD  
-    Client\[Web Client (React \+ Zustand)\]  
-    LB\[Load Balancer\]  
-    API\[API Gateway (Node.js)\]  
-    WS\[WebSocket Server (Socket.io)\]  
-      
-    subgraph Data Layer  
-        PG\[(PostgreSQL Primary)\]  
-        Redis\[(Redis Cache)\]  
-        S3\[Object Storage\]  
-    end  
-      
-    subgraph Client Side  
-        IndexedDB\[(IndexedDB / Dexie)\]  
-        SW\[Service Worker\]  
+```
+graph TD
+    Client[Web Client (React + Zustand)]
+    LB[Load Balancer]
+    API[API Gateway (Node.js)]
+    WS[WebSocket Server (Socket.io)]
+    
+    subgraph Data Layer
+        PG[(PostgreSQL Primary)]
+        Redis[(Redis Cache)]
+        S3[Object Storage]
+    end
+    
+    subgraph Client Side
+        IndexedDB[(IndexedDB / Dexie)]
+        SW[Service Worker]
     end
 
-    Client \--\>|HTTP/REST| LB  
-    Client \--\>|WebSocket| WS  
-    Client \<--\>|Read/Write| IndexedDB  
-      
-    LB \--\> API  
-    API \--\> PG  
-    API \--\> Redis  
-    API \--\> S3  
-      
-    WS \--\> Redis  
-      
-    SW \--\>|Cache| Client
+    Client -->|HTTP/REST| LB
+    Client -->|WebSocket| WS
+    Client <-->|Read/Write| IndexedDB
+    
+    LB --> API
+    API --> PG
+    API --> Redis
+    API --> S3
+    
+    WS --> Redis
+    
+    SW -->|Cache| Client
+```
 
 ## **Data Flow**
 
