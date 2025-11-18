@@ -1,0 +1,80 @@
+/**
+ * @file packages/ui/src/components/KanbanBoard/KanbanBoard.module.css
+ * @purpose Styles for the KanbanBoard component.
+ * @phase 6
+ */
+.board {
+  display: flex;
+  gap: var(--spacing-lg);
+  overflow-x: auto;
+  padding: var(--spacing-lg);
+  min-height: 600px;
+}
+
+.column {
+  width: 300px;
+  flex-shrink: 0;
+  background-color: var(--color-surface-soft);
+  border-radius: var(--radius-card-md);
+  padding: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.columnHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-sm) var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.columnTitle {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-bodyLg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.taskCount {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+  background-color: var(--color-border-subtle);
+  border-radius: var(--radius-pill);
+  padding: 2px 8px;
+}
+
+.taskList {
+  flex-grow: 1;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.taskWrapper {
+  /* This wrapper is required by react-beautiful-dnd */
+}
+
+.addTaskButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  width: 100%;
+  padding: var(--spacing-sm);
+  background: none;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--color-text-secondary);
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-medium);
+  transition: all var(--motion-duration-fast);
+  margin-top: var(--spacing-md);
+}
+.addTaskButton:hover {
+  background-color: var(--color-surface-primary);
+  color: var(--color-text-primary);
+}
