@@ -1,0 +1,78 @@
+/**
+ * @file packages/ui/src/components/Modal/Modal.module.css
+ * @purpose Styles for the Modal component.
+ * @phase 5
+ */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 150ms var(--motion-easing-standard);
+}
+
+.modal {
+  background-color: var(--color-surface-primary);
+  border-radius: var(--radius-card-md);
+  box-shadow: var(--shadow-floating);
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+  overflow: hidden;
+  animation: scaleIn 200ms var(--motion-easing-gentle);
+}
+
+.sm { max-width: 400px; width: 90%; }
+.md { max-width: 600px; width: 90%; }
+.lg { max-width: 800px; width: 90%; }
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-lg) var(--spacing-xl);
+  border-bottom: 1px solid var(--color-border-subtle);
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.closeButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all var(--motion-duration-fast);
+}
+.closeButton:hover {
+  background-color: var(--color-surface-soft);
+  color: var(--color-text-primary);
+}
+
+.content {
+  padding: var(--spacing-xl);
+  overflow-y: auto;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
