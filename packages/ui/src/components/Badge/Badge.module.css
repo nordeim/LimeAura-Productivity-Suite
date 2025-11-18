@@ -1,0 +1,46 @@
+/**
+ * @file packages/ui/src/components/Badge/Badge.module.css
+ * @purpose Styles for the Badge component.
+ * @phase 4
+ */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-semibold);
+  text-transform: capitalize;
+}
+
+/* Sizes */
+.sm {
+  font-size: 10px;
+  padding: var(--spacing-xxs) var(--spacing-sm);
+}
+.md {
+  font-size: var(--font-size-label);
+  padding: var(--spacing-xs) var(--spacing-md);
+}
+
+/* Variants (Soft colors) */
+.primary {
+  background-color: var(--color-accent-primarySoft);
+  color: var(--color-accent-primary);
+}
+.success {
+  background-color: #D1FAE5; /* From design system */
+  color: #065F46;
+}
+.warning {
+  background-color: #FEF3C7; /* From design system */
+  color: #92400E;
+}
+.danger {
+  background-color: #FEE2E2;
+  color: #991B1B;
+}
+.neutral {
+  background-color: var(--color-surface-soft);
+  color: var(--color-text-secondary);
+}
