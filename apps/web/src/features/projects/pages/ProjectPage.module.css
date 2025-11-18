@@ -1,0 +1,15 @@
+/**
+ * @file apps/web/src/features/projects/pages/ProjectPage.module.css
+ * @purpose Styles for the ProjectPage.
+ * @phase 7
+ */
+.wrapper {
+  display: flex;
+  height: 100vh;
+}
+
+.mainContent {
+  flex-grow: 1;
+  overflow-y: auto;
+  background-color: var(--color-surface-primary);
+}
