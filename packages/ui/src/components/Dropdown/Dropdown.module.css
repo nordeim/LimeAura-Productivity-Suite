@@ -1,0 +1,47 @@
+/**
+ * @file packages/ui/src/components/Dropdown/Dropdown.module.css
+ * @purpose Styles for the Dropdown component.
+ * @phase 5
+ */
+.wrapper {
+  display: inline-block;
+  position: relative;
+}
+
+.menu {
+  background-color: var(--color-surface-primary);
+  border-radius: var(--radius-card-md);
+  box-shadow: var(--shadow-floating);
+  padding: var(--spacing-sm);
+  z-index: 100;
+  min-width: 180px;
+  animation: fadeIn 100ms var(--motion-easing-standard);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-body);
+  color: var(--color-text-primary);
+  background: none;
+  border: none;
+  border-radius: 8px; /* Slightly smaller radius for items */
+  cursor: pointer;
+  text-align: left;
+  transition: background-color var(--motion-duration-fast);
+}
+
+.item:hover {
+  background-color: var(--color-surface-soft);
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-text-secondary);
+  font-size: 16px;
+}
