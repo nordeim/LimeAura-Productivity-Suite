@@ -1,0 +1,57 @@
+/**
+ * @file packages/ui/src/components/TagInput/TagInput.module.css
+ * @purpose Styles for the TagInput component.
+ * @phase 5
+ */
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  width: 100%;
+  padding: var(--spacing-sm);
+  background-color: var(--color-surface-soft);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-pill);
+  transition: all var(--motion-duration-normal) var(--motion-easing-standard);
+}
+.wrapper:focus-within {
+  border-color: var(--color-accent-primary);
+  background-color: var(--color-surface-primary);
+  box-shadow: 0 0 0 3px var(--color-accent-primarySoft);
+  outline: none;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.removeButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: none;
+  border: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all var(--motion-duration-fast);
+}
+.removeButton:hover {
+  background-color: rgba(0,0,0,0.1);
+  color: var(--color-text-primary);
+}
+
+.input {
+  flex-grow: 1;
+  border: none;
+  background: none;
+  outline: none;
+  padding: var(--spacing-xs);
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-body);
+  min-width: 100px;
+}
