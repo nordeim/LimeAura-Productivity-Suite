@@ -1,0 +1,39 @@
+/**
+ * @file packages/ui/src/components/Dashboard/Dashboard.module.css
+ * @purpose Styles for the Dashboard grid component.
+ * @phase 6
+ */
+.layout {
+  font-family: var(--font-family-primary);
+}
+
+.widget {
+  background-color: var(--color-surface-primary);
+  border-radius: var(--radius-card-md);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.editable .widget {
+  cursor: move;
+}
+
+/* Override react-grid-layout default styles */
+.layout :global(.react-grid-item.react-grid-placeholder) {
+  background-color: var(--color-accent-primarySoft) !important;
+  border-radius: var(--radius-card-md);
+}
+
+.layout :global(.react-grid-item > .react-resizable-handle) {
+  background: none !important;
+}
+.layout :global(.react-grid-item > .react-resizable-handle::after) {
+  content: '';
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid var(--color-text-muted);
+  border-bottom: 2px solid var(--color-text-muted);
+}
