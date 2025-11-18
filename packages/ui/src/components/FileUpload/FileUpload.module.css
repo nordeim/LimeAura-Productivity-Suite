@@ -1,0 +1,35 @@
+/**
+ * @file packages/ui/src/components/FileUpload/FileUpload.module.css
+ * @purpose Styles for the FileUpload component.
+ * @phase 5
+ */
+.dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xxxl);
+  border: 2px dashed var(--color-border-subtle);
+  border-radius: var(--radius-card-md);
+  background-color: var(--color-surface-soft);
+  color: var(--color-text-secondary);
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-body);
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--motion-duration-normal) var(--motion-easing-standard);
+}
+
+.dropzone:hover {
+  border-color: var(--color-accent-primary);
+}
+
+.dropzone.active {
+  border-color: var(--color-accent-primary);
+  background-color: var(--color-accent-primarySoft);
+}
+
+.icon {
+  color: var(--color-accent-primary);
+  margin-bottom: var(--spacing-md);
+}
